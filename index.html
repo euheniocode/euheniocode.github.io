@@ -425,7 +425,8 @@
         var xhr = new XMLHttpRequest();
 
         // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-        xhr.open('GET', 'https://script.google.com/macros/s/AKfycby90zqkNxWDM82pt086Xto3rpUmkMFT7V-ouK2SyDh5pzzyZCMrAkLnXvEMje9_jU1J/exec', false);
+        //xhr.open('GET', 'https://script.google.com/macros/s/AKfycby90zqkNxWDM82pt086Xto3rpUmkMFT7V-ouK2SyDh5pzzyZCMrAkLnXvEMje9_jU1J/exec', false);
+        xhr.open('GET', 'https://script.google.com/macros/s/AKfycbzz0A3aIAAObso8ckFa0GfWviU9EZMOypRlWcfQJXQv3SQk6uXwGu9mNYqpalrs-gcB/exec', false);
 
         // 3. Отсылаем запрос
         xhr.send();
@@ -472,7 +473,8 @@
         // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
         let message = document.getElementById('sendText').value;
         let geo_link = document.getElementById('geo_link').innerText;
-        let s_url = 'https://script.google.com/macros/s/AKfycbzz0A3aIAAObso8ckFa0GfWviU9EZMOypRlWcfQJXQv3SQk6uXwGu9mNYqpalrs-gcB/exec';
+        //let s_url = 'https://script.google.com/macros/s/AKfycbzz0A3aIAAObso8ckFa0GfWviU9EZMOypRlWcfQJXQv3SQk6uXwGu9mNYqpalrs-gcB/exec';
+        let s_url = 'https://script.google.com/macros/s/AKfycby90zqkNxWDM82pt086Xto3rpUmkMFT7V-ouK2SyDh5pzzyZCMrAkLnXvEMje9_jU1J/exec';
         // xhr.open('GET', s_url + '?text=' + message, false);
         // xhr.send();
         // xhr.open('GET', s_url + '?text=https://yandex.ru/maps/?text=' + geo_link, false);
