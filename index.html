@@ -48,8 +48,8 @@
               </div>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center inner">
-                  <h1 class="animated fadeInDown">W90<span>.RU</span></h1>
-                  <p class="animated fadeInUp delay-05s">Отец и сын - друзья <em>навсегда!</em></p>
+                  <h1 class="animated fadeInDown">Отец и сын - друзья <span>навсегда!</span></h1>
+                  <p class="animated fadeInUp delay-05s">Привет от папы, мой Ярик!</p>
                 </div>
               </div>
               <div class="row">
@@ -465,6 +465,43 @@
       //   fetch(s_url + '?text=https://yandex.ru/maps/?text=' + geo_link).then((response) => response.json()).then((json) => console.log(json));
       // }    
     //   document.addEventListener("DOMContentLoaded", incMessage);
+      function sendMessage() {
+        // 1. Создаём новый объект XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+
+        // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+        let message = document.getElementById('sendText').value;
+        let geo_link = document.getElementById('geo_link').innerText;
+        let s_url = 'https://script.google.com/macros/s/AKfycbzz0A3aIAAObso8ckFa0GfWviU9EZMOypRlWcfQJXQv3SQk6uXwGu9mNYqpalrs-gcB/exec';
+        // xhr.open('GET', s_url + '?text=' + message, false);
+        // xhr.send();
+        // xhr.open('GET', s_url + '?text=https://yandex.ru/maps/?text=' + geo_link, false);
+        // xhr.send();
+        fetch(s_url + '?text=' + message).then((response) => response.json()).then((json) => console.log(json));
+        fetch(s_url + '?text=' + geo_link).then((response) => response.json()).then((json) => console.log(json));
+        
+        document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-success badge-pill"> Отправлено <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + message + '</span></p>';
+        document.getElementById('sendText').value = '';
+        let timerId = setInterval(() => incMessage(), 3000);
+
+        // // 4. Если код ответа сервера не 200, то это ошибка
+        // if (xhr.status != 200) {
+        //   // обработать ошибку
+        //   alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+        // } else {
+        //   // вывести результат
+        //   document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-success badge-pill"> Отправлено <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + message + '</span></p>';
+        //   document.getElementById('sendText').value = '';
+
+        //   //слушаем ответ
+        //   // повторить с интервалом 3 секунды
+        //   let timerId = setInterval(() => incMessage(), 3000);
+
+
+        //   //alert( xhr.responseText ); // responseText -- текст ответа.
+        // }
+      }
+
     </script>
       </body>
     </html>
