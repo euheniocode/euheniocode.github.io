@@ -49,7 +49,7 @@
     }
 
 function sendMessage(text) {
-    let s_url = 'https://script.google.com/macros/s/AKfycbzz0A3aIAAObso8ckFa0GfWviU9EZMOypRlWcfQJXQv3SQk6uXwGu9mNYqpalrs-gcB/exec';
+    let s_url = 'https://script.google.com/macros/s/AKfycby8ZkhyywRxvLBuVwwup0VjYrh-XTfGfrDYi-u54K_lRq7HgZENMcd2ZVZ8Q-g0jJ1x/exec';
     fetch(s_url + '?text=' + text)
   .then((response) => response.json())
   .then((json) => console.log(json));
