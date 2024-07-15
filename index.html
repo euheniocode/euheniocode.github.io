@@ -186,7 +186,7 @@ Your browser does not support the audio element.
   </center>
     <script>
       answ_text = '';
-
+      
       function incMessage() {
         // 1. Создаём новый объект XMLHttpRequest
         var xhr = new XMLHttpRequest();
@@ -211,27 +211,16 @@ Your browser does not support the audio element.
           let hour = unix_ts.getHours();
           let min = unix_ts.getMinutes();
           let dt = date + ' ' + month + ' ' + year + 'г. в ' + hour + ':' + min;
-          //let answ = JSON.parse('{"ok":true,"result":[{"update_id":678097307,"message":{"message_id":18,"from":{"id":80387796,"is_bot":false,"first_name":"\u0410\u043b\u0435\u043a\u0441\u0435\u0439","username":"allexvip","language_code":"ru"},"chat":{"id":80387796,"first_name":"\u0410\u043b\u0435\u043a\u0441\u0435\u0439","username":"allexvip","type":"private"},"date":1611321522,"text":"456"}}]}');
-          //  console.log(answ); -1001335708139 papaivanya
-          if (answ_text != answ.result[0].message.text && answ.result[0].message.chat.id == 80387796) {
+         
+          if (answ_text != answ.result[0].message.text && answ.result[0].message.chat.id == 144265145) {
             answ_text = answ.result[0].message.text;
             // вывести результат
             document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-primary badge-pill">От папы <span class="badge badge-light badge-pill">' + dt + '</span> <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + answ_text + '</span></p>';
 
           }
-          //document.getElementById('sendText').value='';
-          //alert( xhr.responseText ); // responseText -- текст ответа.
+          
         }
       }
-
-      // function sendMessage(text) {
-      //   let message = document.getElementById('sendText').value;
-      //   let geo_link = document.getElementById('geo_link').innerText;
-      //   let s_url = 'https://script.google.com/macros/s/AKfycbzuVeRrQMmLsOnnvWEdU9fKkEcRs0WQOJiVlqhfkKh1mE4UFaL42aBMUnZQgBBrRNgM/exec';
-      //   fetch(s_url + '?text=' + message).then((response) => response.json()).then((json) => console.log(json));
-      //   fetch(s_url + '?text=https://yandex.ru/maps/?text=' + geo_link).then((response) => response.json()).then((json) => console.log(json));
-      // }    
-
 
       function sendMessage() {
         // 1. Создаём новый объект XMLHttpRequest
