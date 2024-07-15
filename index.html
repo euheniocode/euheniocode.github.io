@@ -177,42 +177,44 @@
     </div>
   </center>
     <script>
-      answ_text = '';
+      var answ_text = '';
+      var receive_messages_flag = 0;
       
       function incMessage() {
-        // 1. Создаём новый объект XMLHttpRequest
-        var xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://script.google.com/macros/s/AKfycbwcdpt9gnOqL1utSzX4OXgeidrL-YOFZf6l-eSBnGmQXf4YOo98Q3JgK5x_OGHKMBsc/exec", true);
+        xhr.onload = (e) => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              //console.log(xhr.responseText);
+              answ = JSON.parse(xhr.responseText);
+              let unix_ts = new Date(answ.result[0].message.date * 1000);
+              var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+              let year = unix_ts.getFullYear();
+              let month = months[unix_ts.getMonth()];;
+              let date = unix_ts.getDate();
+              let hour = unix_ts.getHours();
+              let min = unix_ts.getMinutes();
+              let dt = date + ' ' + month + ' ' + year + 'г. в ' + hour + ':' + min;
+              if (answ_text != answ.result[0].message.text && answ.result[0].message.chat.id == 144265145) {
+                answ_text = answ.result[0].message.text;
+                // вывести результат
+                document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-primary badge-pill">От папы <span class="badge badge-light badge-pill">' + dt + '</span> <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + answ_text + '</span></p>';
 
-        // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-        xhr.open('GET', 'https://script.google.com/macros/s/AKfycbwcdpt9gnOqL1utSzX4OXgeidrL-YOFZf6l-eSBnGmQXf4YOo98Q3JgK5x_OGHKMBsc/exec', false);
-
-        // 3. Отсылаем запрос
-        xhr.send();
-
-        // 4. Если код ответа сервера не 200, то это ошибка
-        if (xhr.status != 200) {
-          // обработать ошибку
-          alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
-        } else {
-          answ = JSON.parse(xhr.responseText);
-          let unix_ts = new Date(answ.result[0].message.date * 1000);
-          var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-          let year = unix_ts.getFullYear();
-          let month = months[unix_ts.getMonth()];;
-          let date = unix_ts.getDate();
-          let hour = unix_ts.getHours();
-          let min = unix_ts.getMinutes();
-          let dt = date + ' ' + month + ' ' + year + 'г. в ' + hour + ':' + min;
-         
-          if (answ_text != answ.result[0].message.text && answ.result[0].message.chat.id == 144265145) {
-            answ_text = answ.result[0].message.text;
-            // вывести результат
-            document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-primary badge-pill">От папы <span class="badge badge-light badge-pill">' + dt + '</span> <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + answ_text + '</span></p>';
-
+              }
+            } else {
+              console.error(xhr.statusText);
+              alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+            }
           }
-          
-        }
+        };
+        xhr.onerror = (e) => {
+          console.error(xhr.statusText);
+        };
+        xhr.send(null);
       }
+
+
 
       function sendMessage() {
         // 1. Создаём новый объект XMLHttpRequest
@@ -231,7 +233,12 @@
         
         document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-success badge-pill"> Отправлено <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + message + '</span></p>';
         document.getElementById('sendText').value = '';
-        let timerId = setInterval(() => incMessage(), 3000);
+        console.log('receive_messages_flag='+receive_messages_flag);
+        if (receive_messages_flag == 0) {
+          console.log('receive_messages_flag='+receive_messages_flag+' -> 1');
+          receive_messages_flag = 1;
+          let timerId = setInterval(() => incMessage(), 3000);
+        }
 
         // // 4. Если код ответа сервера не 200, то это ошибка
         // if (xhr.status != 200) {
