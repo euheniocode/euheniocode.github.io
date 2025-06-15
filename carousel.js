@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Путь к папке с изображениями
-    const imageFolder = 'foto/images/'; // Замените на ваш путь
+    const imageFolder = './foto/images/'; // Замените на ваш путь
     
     // Массив с именами файлов изображений
     const imageFiles = [
@@ -25,24 +25,32 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
     
     // Загрузка изображений в карусель
-    function loadImages() {
-        imageFiles.forEach((file, index) => {
-            const img = document.createElement('img');
-            img.src = imageFolder + file;
-            img.alt = `Изображение ${index + 1}`;
-            carousel.appendChild(img);
+    async function loadImages() {
+        try {
+            // Запрашиваем список изображений с сервера
+            const response = await fetch('get_images.php'); // или другой endpoint
+            const imageFiles = await response.json();
             
-            // Создаем точки для навигации
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.dataset.index = index;
-            dotsContainer.appendChild(dot);
-            
-            dot.addEventListener('click', () => {
-                goToSlide(index);
+            if (!imageFiles.length) {
+                console.error("Нет изображений в папке");
+                return;
+            }
+
+            imageFiles.forEach((file, index) => {
+                const img = document.createElement('img');
+                img.src = `${imageFolder}${file}`;
+                img.onerror = () => {
+                    console.error(`Не удалось загрузить: ${file}`);
+                    img.src = 'placeholder.jpg'; // изображение-заглушка
+                };
+                carousel.appendChild(img);
+                
+                // ... остальной код для точек и т.д.
             });
-        });
+        } catch (error) {
+            console.error("Ошибка при загрузке списка изображений:", error);
+        }
+    }
         
         updateCounter();
     }
