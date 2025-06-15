@@ -133,6 +133,46 @@
     </nav>
   </div>
 
+
+  <h4>
+    <div id="sendResult" class="alert alert-light"></div>
+  </h4>
+
+
+
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="form-row align-items-center">
+          <div class="col-12">
+            <div class="input-group mb-2">
+              <input type="text" class="form-control" id="sendText" placeholder="Напиши папе сообщение">
+              <div class="input-group-prepend">
+                <button type="submit" onclick="sendMessage();" class="btn btn-success mb-2"><i
+                    class="fab fa-telegram-plane"></i></button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <center>
+  <div class="container">
+    <h1>
+      <a id="btn_video" class="btn btn-success" href="peer/index.html?start=1"><i class="fas fa-video"></i>
+        Видеозвонок</a>
+    </h1>
+  </div>
+
+  </center>
+  
     <div class="carousel">
         <div class="carousel-container">
             <!-- Слайды будут добавлены динамически -->
@@ -230,38 +270,6 @@
         });
     </script>
 
-
-
-
-  <h4>
-    <div id="sendResult" class="alert alert-light"></div>
-  </h4>
-
-
-
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-
-    <div class="card">
-      <div class="card-body">
-
-        <div class="form-row align-items-center">
-          <div class="col-12">
-            <div class="input-group mb-2">
-              <input type="text" class="form-control" id="sendText" placeholder="Напиши папе сообщение">
-              <div class="input-group-prepend">
-                <button type="submit" onclick="sendMessage();" class="btn btn-success mb-2"><i
-                    class="fab fa-telegram-plane"></i></button>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-
   <div class="game" onclick="gameStart();">
     <div id="dino"></div>
     <div id="cactus"></div>
@@ -270,15 +278,7 @@
     <div id="dino_info"></div>
   </center>
   <script src="script.js"></script>
-  <center>
-  <div class="container">
-    <h1>
-      <a id="btn_video" class="btn btn-success" href="peer/index.html?start=1"><i class="fas fa-video"></i>
-        Видеозвонок</a>
-    </h1>
-    
 
-  </center>
     <script>
       var answ_text = '';
       var receive_messages_flag = 0;
