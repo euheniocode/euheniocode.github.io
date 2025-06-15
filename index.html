@@ -280,6 +280,23 @@
   <script src="script.js"></script>
 
     <script>
+
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+
+        // Текущие координаты.
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        var geo_link = 'https://yandex.ru/maps/?text=' + lat + '%2C' + lng + '&z=15';
+        console.log(position.coords);
+        document.getElementById('geo_link').innerHTML = geo_link;
+        document.getElementById('test').innerHTML = '<a target="_blank" href="' + geo_link + '">geo</a>';
+        document.getElementById('btn_video').href = "peer/index.html?geo_link=" + position.coords.latitude + "," + position.coords.longitude + "&start=1"
+        document.getElementById('btn_video2').href = "peer/index.html?geo_link=" + position.coords.latitude + "," + position.coords.longitude + "&start=1"
+      });
+    </script>
+
+    <script>
       var answ_text = '';
       var receive_messages_flag = 0;
       
@@ -378,22 +395,7 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"></script>
 
-    <script>
 
-
-      navigator.geolocation.getCurrentPosition(function (position) {
-
-        // Текущие координаты.
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
-        var geo_link = 'https://yandex.ru/maps/?text=' + lat + '%2C' + lng + '&z=15';
-        console.log(position.coords);
-        document.getElementById('geo_link').innerHTML = geo_link;
-        document.getElementById('test').innerHTML = '<a target="_blank" href="' + geo_link + '">geo</a>';
-        document.getElementById('btn_video').href = "peer/index.html?geo_link=" + position.coords.latitude + "," + position.coords.longitude + "&start=1"
-        document.getElementById('btn_video2').href = "peer/index.html?geo_link=" + position.coords.latitude + "," + position.coords.longitude + "&start=1"
-      });
-    </script>
 </body>
 
 </html>
