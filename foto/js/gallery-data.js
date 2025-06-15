@@ -1,11 +1,11 @@
-// Автоматически сгенерировано 2025-04-11 20:10
+// Автоматически сгенерировано 2025-06-15 17:54
 const galleryImages = [
   {
-    "src": "images/dino.png",
+    "src": "foto/images/dino.png",
     "caption": ""
   },
   {
-    "src": "images/cactus.png",
+    "src": "foto/images/cactus.png",
     "caption": ""
   }
 ];

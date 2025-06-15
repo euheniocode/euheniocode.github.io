@@ -16,7 +16,7 @@ def generate_image_list(image_folder, output_js_file):
             filepath = os.path.join(image_folder, filename)
             mtime = os.path.getmtime(filepath)
             images.append({
-                'src': f'images/{filename}',
+                'src': f'foto/images/{filename}',
                 'caption': '',
                 'mtime': mtime
             })
