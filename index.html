@@ -38,6 +38,69 @@
         font-size: 3.5rem;
       }
     }
+    .carousel {
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        margin: auto;
+        overflow: hidden;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+    }
+    
+    .carousel-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .carousel-slide {
+        min-width: 100%;
+    }
+    
+    .carousel-slide img {
+        width: 100%;
+        display: block;
+    }
+    
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 50%;
+        font-size: 18px;
+    }
+    
+    #prevBtn {
+        left: 10px;
+    }
+    
+    #nextBtn {
+        right: 10px;
+    }
+    
+    .carousel-indicators {
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-color: #bbb;
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+    
+    .indicator.active {
+        background-color: #333;
+    }
   </style>
   <link rel="stylesheet" href="style.css">
   <!-- Custom styles for this template -->
@@ -59,7 +122,102 @@
     </nav>
   </div>
 
+    <div class="carousel">
+        <div class="carousel-container">
+            <!-- Слайды будут добавлены динамически -->
+        </div>
+        <button class="carousel-btn" id="prevBtn">&#10094;</button>
+        <button class="carousel-btn" id="nextBtn">&#10095;</button>
+    </div>
+    <div class="carousel-indicators">
+        <!-- Индикаторы будут добавлены динамически -->
+    </div>
 
+    <script>
+        // Массив с путями к изображениям
+        const images = [
+        'foto/images/photo_2024-07-09_15-25-46.jpg',
+        'foto/images/photo_2024-08-27_22-26-39.jpg',
+        'foto/images/photo_2024-11-23_13-50-23.jpg',
+        'foto/images/photo_2024-12-31_22-45-57.jpg',
+        'foto/images/photo_2024-12-31_22-46-53.jpg',
+        'foto/images/photo_2025-01-26_23-35-56.jpg',
+        'foto/images/photo_2025-02-08_15-46-38.jpg',
+        'foto/images/photo_2025-06-15_18-06-13.jpg',
+        'foto/images/photo_2025-06-15_18-06-19.jpg'
+        ];
+        
+        const carouselContainer = document.querySelector('.carousel-container');
+        const indicatorsContainer = document.querySelector('.carousel-indicators');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+        
+        // Создаем слайды и индикаторы
+        images.forEach((image, index) => {
+            // Создаем слайд
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            slide.innerHTML = `<img src="${image}" alt="Изображение ${index + 1}">`;
+            carouselContainer.appendChild(slide);
+            
+            // Создаем индикатор
+            const indicator = document.createElement('span');
+            indicator.className = 'indicator';
+            if (index === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(index));
+            indicatorsContainer.appendChild(indicator);
+        });
+        
+        // Функция для перехода к конкретному слайду
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+        
+        // Функция для обновления карусели
+        function updateCarousel() {
+            carouselContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Обновляем активный индикатор
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+        
+        // Переход к следующему слайду
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateCarousel();
+        }
+        
+        // Переход к предыдущему слайду
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateCarousel();
+        }
+        
+        // Обработчики событий для кнопок
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Автоматическое перелистывание (опционально)
+        let interval = setInterval(nextSlide, 3000);
+        
+        // Останавливаем автоперелистывание при наведении
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(interval);
+        });
+        
+        carouselContainer.addEventListener('mouseleave', () => {
+            interval = setInterval(nextSlide, 3000);
+        });
+    </script>
 
 
 
@@ -107,106 +265,8 @@
       <a id="btn_video" class="btn btn-success" href="peer/index.html?start=1"><i class="fas fa-video"></i>
         Видеозвонок</a>
     </h1>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .carousel-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            height: 500px;
-        }
-        
-        .carousel img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-        
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s;
-        }
-        
-        .carousel-btn:hover {
-            background: white;
-        }
-        
-        .prev {
-            left: 15px;
-        }
-        
-        .next {
-            right: 15px;
-        }
-        
-        .carousel-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .dot.active {
-            background: white;
-            transform: scale(1.2);
-        }
-        
-        .image-counter {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            z-index: 10;
-        }
-    </style>
     
-    <div class="carousel-container">
-        <div class="carousel"></div>
-        <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
-        <div class="carousel-dots"></div>
-        <div class="image-counter"></div>
-    </div>
 
-    <script src="carousel.js"></script>
   </center>
     <script>
       var answ_text = '';
