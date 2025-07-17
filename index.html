@@ -148,7 +148,7 @@
         <div class="form-row align-items-center">
           <div class="col-12">
             <div class="input-group mb-2">
-              <input type="text" class="form-control" id="sendText" placeholder="Напиши папе сообщение">
+              <input type="text" class="form-control" id="sendText" placeholder="Напиши папе сообщение"  onkeypress="handleKeyPress(event)">
               <div class="input-group-prepend">
                 <button type="submit" onclick="sendMessage();" class="btn btn-success mb-2"><i
                     class="fab fa-telegram-plane"></i></button>
@@ -268,6 +268,13 @@
         carouselContainer.addEventListener('mouseleave', () => {
             interval = setInterval(nextSlide, 3000);
         });
+        
+      // Функция для обработки нажатия Enter
+      function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+          sendMessage();
+        }
+      }
     </script>
 
   <div class="game" onclick="gameStart();">
