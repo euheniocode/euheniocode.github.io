@@ -116,6 +116,7 @@
     .messages-container {
         max-height: 300px;
         overflow-y: auto;
+        height: 200px; /* Фиксированная высота*/
         margin-bottom: 20px;
     }
   </style>
@@ -191,19 +192,10 @@
             <!-- Индикаторы будут добавлены динамически -->
         </div>
     </div>
+    <!-- Подключаем сгенерированный скрипт с данными -->
+    <script src="foto/js/gallery-data.js"></script>
     <script>
         // Массив с путями к изображениям
-        const images = [
-        'foto/images/photo_2024-07-09_15-25-46.jpg',
-        'foto/images/photo_2024-08-27_22-26-39.jpg',
-        'foto/images/photo_2024-11-23_13-50-23.jpg',
-        'foto/images/photo_2024-12-31_22-45-57.jpg',
-        'foto/images/photo_2024-12-31_22-46-53.jpg',
-        'foto/images/photo_2025-01-26_23-35-56.jpg',
-        'foto/images/photo_2025-02-08_15-46-38.jpg',
-        'foto/images/photo_2025-06-15_18-06-13.jpg',
-        'foto/images/photo_2025-06-15_18-06-19.jpg'
-        ];
         
         const carouselContainer = document.querySelector('.carousel-container');
         const indicatorsContainer = document.querySelector('.carousel-indicators');
