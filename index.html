@@ -97,6 +97,7 @@
     .carousel-indicators {
         text-align: center;
         padding: 10px 0;
+        margin-bottom: 20px; /* Добавим отступ снизу */
     }
     
     .indicator {
@@ -111,6 +112,12 @@
     
     .indicator.active {
         background-color: #333;
+    }
+    /* Добавим фиксированную высоту для контейнера сообщений */
+    .messages-container {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 20px;
     }
   </style>
   <link rel="stylesheet" href="style.css">
@@ -134,9 +141,11 @@
   </div>
 
 
-  <h4>
-    <div id="sendResult" class="alert alert-light"></div>
-  </h4>
+  <div class="messages-container">
+    <h4>
+      <div id="sendResult" class="alert alert-light"></div>
+    </h4>
+  </div>
 
 
 
