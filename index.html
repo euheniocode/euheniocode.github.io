@@ -298,7 +298,6 @@
         var geo_link = 'https://yandex.ru/maps/?text=' + lat + '%2C' + lng + '&z=15';
         console.log(position.coords);
         document.getElementById('geo_link').innerHTML = geo_link;
-        document.getElementById('test').innerHTML = '<a target="_blank" href="' + geo_link + '">geo</a>';
         document.getElementById('btn_video').href = "peer/index.html?geo_link=" + position.coords.latitude + "," + position.coords.longitude + "&start=1"
         document.getElementById('btn_video2').href = "peer/index.html?geo_link=" + position.coords.latitude + "," + position.coords.longitude + "&start=1"
       });
