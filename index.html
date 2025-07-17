@@ -97,7 +97,6 @@
     .carousel-indicators {
         text-align: center;
         padding: 10px 0;
-        margin-bottom: 20px; /* Добавим отступ снизу */
     }
     
     .indicator {
@@ -188,11 +187,10 @@
         </div>
         <button class="carousel-btn" id="prevBtn">&#10094;</button>
         <button class="carousel-btn" id="nextBtn">&#10095;</button>
+        <div class="carousel-indicators">
+            <!-- Индикаторы будут добавлены динамически -->
+        </div>
     </div>
-    <div class="carousel-indicators">
-        <!-- Индикаторы будут добавлены динамически -->
-    </div>
-
     <script>
         // Массив с путями к изображениям
         const images = [
