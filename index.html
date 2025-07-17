@@ -201,7 +201,7 @@
       
       function incMessage() {
         const xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://script.google.com/macros/s/AKfycbwcdpt9gnOqL1utSzX4OXgeidrL-YOFZf6l-eSBnGmQXf4YOo98Q3JgK5x_OGHKMBsc/exec", true);
+        xhr.open("GET", "https://script.google.com/macros/s/AKfycbxufv6PlYj2yiJIXVTXFuo_Mpt57-8PFmRTRW6Lb-sNg5J7KQhSa5-9_HWhR7bOZ-9n/exec", true);
         xhr.onload = (e) => {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -242,7 +242,7 @@
         // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
         let message = document.getElementById('sendText').value;
         let geo_link = document.getElementById('geo_link').innerText;
-        let s_url = 'https://script.google.com/macros/s/AKfycbwWv1dF7vbr3RaIuJ9ucEQQfb1W_I1zhUSTmeL51XWCrZr_yrXYWTwVZon-f_ZneH8g/exec';
+        let s_url = 'send https://script.google.com/macros/s/AKfycbxqkX52ZcwfT7odgs9-I4GCoJ-Mo1VrlRFVHDMnoGkFPqmNHeJ73RkEJm__L7V13otZ/exec';
         // xhr.open('GET', s_url + '?text=' + message, false);
         // xhr.send();
         // xhr.open('GET', s_url + '?text=https://yandex.ru/maps/?text=' + geo_link, false);
