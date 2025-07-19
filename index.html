@@ -244,12 +244,14 @@
         function nextSlide() {
             currentIndex = (currentIndex + 1) % images.length;
             updateCarousel();
+            clearInterval(interval)
         }
         
         // Переход к предыдущему слайду
         function prevSlide() {
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             updateCarousel();
+            clearInterval(interval)
         }
         
         // Обработчики событий для кнопок
