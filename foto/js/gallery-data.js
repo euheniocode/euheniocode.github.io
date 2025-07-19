@@ -1,5 +1,12 @@
-// Автоматически сгенерировано 2025-07-19 14:12
-const images  = ['foto/images/photo_2025-07-19_14-10-00.jpg',
+// Автоматически сгенерировано 2025-07-19 20:09
+const images  = ['foto/images/photo_2025-07-19_20-07-20.jpg',
+'foto/images/photo_2025-07-19_20-07-20 (5).jpg',
+'foto/images/photo_2025-07-19_20-07-20 (4).jpg',
+'foto/images/photo_2025-07-19_20-07-20 (3).jpg',
+'foto/images/photo_2025-07-19_20-07-20 (2).jpg',
+'foto/images/photo_2025-07-19_20-07-19.jpg',
+'foto/images/photo_2025-07-19_20-07-19 (2).jpg',
+'foto/images/photo_2025-07-19_14-10-00.jpg',
 'foto/images/photo_2025-07-19_14-10-00 (2).jpg',
 'foto/images/photo_2025-07-17_23-17-10.jpg',
 'foto/images/photo_2025-07-17_23-16-44.jpg',

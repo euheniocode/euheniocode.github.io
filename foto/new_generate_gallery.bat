@@ -1,0 +1,1 @@
+c:\Users\Eugen\AppData\Local\Programs\Python\Python311\python.exe new_generate_gallery.py
