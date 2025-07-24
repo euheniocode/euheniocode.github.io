@@ -1,5 +1,6 @@
-// Автоматически сгенерировано 2025-07-19 20:09
-const images  = ['foto/images/photo_2025-07-19_20-07-20.jpg',
+// Автоматически сгенерировано 2025-07-24 18:31
+const images  = ['foto/images/photo_2025-07-24_18-25-44.jpg',
+'foto/images/photo_2025-07-19_20-07-20.jpg',
 'foto/images/photo_2025-07-19_20-07-20 (5).jpg',
 'foto/images/photo_2025-07-19_20-07-20 (4).jpg',
 'foto/images/photo_2025-07-19_20-07-20 (3).jpg',
