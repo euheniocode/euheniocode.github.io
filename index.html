@@ -410,7 +410,7 @@
                 answ_text = answ.result[0].message.text;
                 // вывести результат
                 document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-primary badge-pill">От папы <span class="badge badge-light badge-pill">' + dt + '</span> <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + answ_text + '</span></p>';
-
+                scrollToBottom()
               }
             } else {
               console.error(xhr.statusText);
@@ -421,7 +421,6 @@
         xhr.onerror = (e) => {
           console.error(xhr.statusText);
         };
-        scrollToBottom()
         xhr.send(null);
       }
 
