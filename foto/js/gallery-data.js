@@ -1,12 +1,12 @@
 // Автоматически сгенерировано 2025-07-24 18:31
 const telegramPosts = [
-  "https://t.me/Papa_i_Yar/39",
-  "https://t.me/Papa_i_Yar/36", 
-  "https://t.me/Papa_i_Yar/28", 
-  "https://t.me/Papa_i_Yar/26",
-  "https://t.me/Papa_i_Yar/22", 
-  "https://t.me/Papa_i_Yar/16", 
-  "https://t.me/Papa_i_Yar/9",
-  "https://t.me/Papa_i_Yar/7",
-  "https://t.me/Papa_i_Yar/3",
+  "Papa_i_Yar/39",
+  "Papa_i_Yar/36", 
+  "Papa_i_Yar/28", 
+  "Papa_i_Yar/26",
+  "Papa_i_Yar/22", 
+  "Papa_i_Yar/16", 
+  "Papa_i_Yar/9",
+  "Papa_i_Yar/7",
+  "Papa_i_Yar/3",
 ];
