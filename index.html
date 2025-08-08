@@ -42,38 +42,40 @@
         position: relative;
         width: 80%;
         max-width: 600px;
-        height: auto;
+        height: auto; /* Фиксированная высота для карусели */
         margin: auto;
         overflow: hidden;
         border: 2px solid #ddd;
         border-radius: 10px;
         background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
     }
 
     .carousel-container {
         display: flex;
         height: 100%;
         transition: transform 0.5s ease-in-out;
+        align-items: center; /* Центрирование по вертикали */
     }
 
     .carousel-slide {
         min-width: 100%;
-        height: 100%;
+        height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
     }
-    @telegram-post {
-      width: 90%; /* Ширина поста (можно регулировать) */
-      max-width: 550px; /* Максимальная ширина */
-      margin: 0 auto; /* Автоматические отступы по бокам */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: auto;
-      min-height: 300px; /* Минимальная высота контейнера поста */
+
+    .telegram-post-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px; /* Минимальная высота для поста */
     }
+    
     .carousel-btn {
         position: absolute;
         top: 50%;
@@ -99,6 +101,10 @@
     .carousel-indicators {
         text-align: center;
         padding: 10px 0;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
     }
     
     .indicator {
@@ -215,12 +221,18 @@
                     // Создаем слайд
                     const slide = document.createElement('div');
                     slide.className = 'carousel-slide';
+                    
+                    // Контейнер для Telegram-поста
+                    const postContainer = document.createElement('div');
+                    postContainer.className = 'telegram-post-container';
+                    
                     const script = document.createElement('script');
                     script.async = true;
                     script.src = "https://telegram.org/js/telegram-widget.js?22";
                     script.setAttribute('data-telegram-post', postUrl);
                     script.setAttribute('data-width', '100%');
-                    slide.appendChild(script) ;
+                    postContainer.appendChild(script);
+                    slide.appendChild(postContainer);
                     carouselContainer.appendChild(slide);
                     
                     // Создаем индикатор
