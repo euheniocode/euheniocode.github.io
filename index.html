@@ -243,9 +243,6 @@
                     indicatorsContainer.appendChild(indicator);
                 });
                 
-                 // Инициализация Telegram Widget после создания слайдов
-            }
-            )
                   // Функции управления карусельюу
                 function goToSlide(index) {
                     currentIndex = index;
@@ -295,6 +292,8 @@
                 carouselContainer.addEventListener('mouseleave', () => {
                     interval = setInterval(nextSlide, 3000);
                 });
+            }
+            )
                 
               // Функция для обработки нажатия Enter
               function handleKeyPress(event) {
