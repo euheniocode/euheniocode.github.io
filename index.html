@@ -367,7 +367,11 @@
     <div hidden id="geo_link"></div>
 
     <script>
-
+    // Функция для прокрутки вниз
+    function scrollToBottom() {
+        const container = document.querySelector('.messages-container')
+        container.scrollTop = container.scrollHeight;
+    }
 
       navigator.geolocation.getCurrentPosition(function (position) {
 
@@ -417,6 +421,7 @@
         xhr.onerror = (e) => {
           console.error(xhr.statusText);
         };
+        scrollToBottom()
         xhr.send(null);
       }
 
@@ -445,7 +450,7 @@
           receive_messages_flag = 1;
           let timerId = setInterval(() => incMessage(), 3000);
         }
-
+        scrollToBottom()
         // // 4. Если код ответа сервера не 200, то это ошибка
         // if (xhr.status != 200) {
         //   // обработать ошибку
