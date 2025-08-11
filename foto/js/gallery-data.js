@@ -1,5 +1,7 @@
 // Автоматически сгенерировано 2025-07-24 18:31
 const telegramPosts = [
+  "Papa_i_Yar/46",
+  "Papa_i_Yar/45",
   "Papa_i_Yar/39",
   "Papa_i_Yar/36", 
   "Papa_i_Yar/28", 
