@@ -136,6 +136,14 @@
 </head>
 
 <body>
+    <div id="loginBlock" style="position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:9999; display:none; justify-content:center; align-items:center; flex-direction:column;">
+        <div class="card p-4 shadow" style="width: 300px;">
+            <h5 class="text-center">Доступ ограничен</h5>
+            <input type="password" id="sitePass" class="form-control my-3" placeholder="Введите пароль">
+            <button onclick="checkPassword()" class="btn btn-primary btn-block">Войти</button>
+            <p id="passError" class="text-danger text-center mt-2" style="display:none;">Неверно!</p>
+        </div>
+    </div>
     <div class="d-flex align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm position-relative">
       <!-- Пустой блок для балансировки (скрыт на мобильных) -->
       <div class="d-none d-md-block me-auto" style="width: 120px;"></div>
@@ -171,21 +179,23 @@
 
     <div class="card">
       <div class="card-body">
-
-        <div class="form-row align-items-center">
-          <div class="col-12">
-            <div class="input-group mb-2">
-              <input type="text" class="form-control" id="sendText" placeholder="Напиши папе сообщение"  onkeypress="handleKeyPress(event)">
-              <div class="input-group-prepend">
-                <button type="submit" onclick="sendMessage();" class="btn btn-success mb-2"><i
-                    class="fab fa-telegram-plane"></i></button>
-              </div>
-            </div>
-
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <label class="btn btn-outline-secondary mb-0" for="fileInput" title="Прикрепить фото или видео">
+              <i class="fas fa-paperclip"></i>
+            </label>
+            <input type="file" id="fileInput" accept="image/*,video/*" style="display:none" onchange="previewFile()">
           </div>
-
+          
+          <input type="text" class="form-control" id="sendText" placeholder="Напиши папе сообщение" onkeypress="handleKeyPress(event)">
+          
+          <div class="input-group-append">
+            <button type="submit" id="mainSendBtn" onclick="sendMessage();" class="btn btn-success">
+              <i class="fab fa-telegram-plane"></i>
+            </button>
+          </div>
         </div>
-
+        <div id="fileNamePreview" style="font-size: 12px; color: #28a745; font-weight: bold;"></div>
       </div>
     </div>
   </div>
@@ -436,47 +446,99 @@
 
 
 
-      function sendMessage() {
-        // 1. Создаём новый объект XMLHttpRequest
-        var xhr = new XMLHttpRequest();
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzpwJlAUbPBFlDt7CGODeBQG82TiQd4wcLyZDj-FWJaJ9RenY5ht4Dl_E0sZF9Gypd7kA/exec"; // Вставь сюда URL развернутого скрипта
 
-        // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-        let message = document.getElementById('sendText').value;
-        let geo_link = document.getElementById('geo_link').innerText;
-        let s_url = 'https://script.google.com/macros/s/AKfycbxqkX52ZcwfT7odgs9-I4GCoJ-Mo1VrlRFVHDMnoGkFPqmNHeJ73RkEJm__L7V13otZ/exec';
-        // xhr.open('GET', s_url + '?text=' + message, false);
-        // xhr.send();
-        // xhr.open('GET', s_url + '?text=https://yandex.ru/maps/?text=' + geo_link, false);
-        // xhr.send();
-        fetch(s_url + '?text=' + message).then((response) => response.json()).then((json) => console.log(json));
-        fetch(s_url + '?text=' + geo_link).then((response) => response.json()).then((json) => console.log(json));
-        
-        document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-success badge-pill"> Отправлено <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + message + '</span></p>';
-        document.getElementById('sendText').value = '';
-        console.log('receive_messages_flag='+receive_messages_flag);
-        if (receive_messages_flag == 0) {
-          console.log('receive_messages_flag='+receive_messages_flag+' -> 1');
-          receive_messages_flag = 1;
-          let timerId = setInterval(() => incMessage(), 3000);
+// 1. Проверка сессии при загрузке
+document.addEventListener("DOMContentLoaded", function() {
+    const expiry = localStorage.getItem('sessionExpiry');
+    if (!expiry || Date.now() > expiry) {
+        document.getElementById('loginBlock').style.display = 'flex';
+    }
+});
+
+// 2. Функция входа
+function checkPassword() {
+    const pass = document.getElementById('sitePass').value;
+    fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'login', pass: pass })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "ok") {
+            // Устанавливаем сессию на 10 минут
+            const tenMinutes = 10 * 60 * 1000;
+            localStorage.setItem('sessionExpiry', Date.now() + tenMinutes);
+            document.getElementById('loginBlock').style.display = 'none';
+        } else {
+            document.getElementById('passError').style.display = 'block';
         }
-        scrollToBottom()
-        // // 4. Если код ответа сервера не 200, то это ошибка
-        // if (xhr.status != 200) {
-        //   // обработать ошибку
-        //   alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
-        // } else {
-        //   // вывести результат
-        //   document.getElementById('sendResult').innerHTML += '<p><span class="badge badge-success badge-pill"> Отправлено <span class="badge badge-light badge-pill"><i class="fas fa-check"></i></span></span> <span class="badge badge-light badge-pill">' + message + '</span></p>';
-        //   document.getElementById('sendText').value = '';
+    });
+}
 
-        //   //слушаем ответ
-        //   // повторить с интервалом 3 секунды
-        //   let timerId = setInterval(() => incMessage(), 3000);
+// 3. Предпросмотр выбранного файла
+function previewFile() {
+    const file = document.getElementById('fileInput').files[0];
+    if (file) {
+        if (file.size > 15 * 1024 * 1024) {
+            alert("Файл слишком большой! Максимум 15 Мб.");
+            document.getElementById('fileInput').value = '';
+            return;
+        }
+        document.getElementById('fileNamePreview').innerText = "📎 " + file.name;
+    }
+}
 
+// 4. Основная функция отправки
+async function sendMessage() {
+    const text = document.getElementById('sendText').value;
+    const geo = document.getElementById('geo_link').innerText;
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+    const btn = document.getElementById('mainSendBtn');
 
-        //   //alert( xhr.responseText ); // responseText -- текст ответа.
-        // }
-      }
+    if (!text && !file) return;
+
+    btn.disabled = true; // Блокируем кнопку на время отправки
+    
+    let payload = {
+        action: "sendMessage",
+        text: text,
+        geo: geo
+    };
+
+    if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = async function () {
+            payload.fileData = reader.result.split(',')[1]; // Чистый Base64
+            payload.fileName = file.name;
+            payload.fileType = file.type;
+            await sendFinal(payload);
+        };
+    } else {
+        await sendFinal(payload);
+    }
+}
+
+async function sendFinal(payload) {
+    try {
+        await fetch(GAS_URL, {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        });
+        
+        document.getElementById('sendResult').innerHTML += `<p><span class="badge badge-success">Отправлено!</span> ${payload.text || 'Файл'}</p>`;
+        document.getElementById('sendText').value = '';
+        document.getElementById('fileInput').value = '';
+        document.getElementById('fileNamePreview').innerText = '';
+        scrollToBottom();
+    } catch (e) {
+        alert("Ошибка отправки");
+    } finally {
+        document.getElementById('mainSendBtn').disabled = false;
+    }
+}
 
       function autocall() {
         //263858@sip.comtube.com
