@@ -139,7 +139,7 @@
     <div id="loginBlock" style="position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:9999; display:none; justify-content:center; align-items:center; flex-direction:column;">
         <div class="card p-4 shadow" style="width: 300px;">
             <h5 class="text-center">Доступ ограничен</h5>
-            <input type="password" id="sitePass" class="form-control my-3" placeholder="Введите пароль">
+            <input type="password" id="sitePass" class="form-control my-3" placeholder="Введите пароль" onkeypress="handleKeyPressPwd(event)">
             <button onclick="checkPassword()" class="btn btn-primary btn-block">Войти</button>
             <p id="passError" class="text-danger text-center mt-2" style="display:none;">Неверно!</p>
         </div>
@@ -319,6 +319,11 @@
               function handleKeyPress(event) {
                 if (event.key === 'Enter') {
                   sendMessage();
+                }
+              }
+              function handleKeyPressPwd(event) {
+                if (event.key === 'Enter') {
+                  checkPassword();
                 }
               }
     </script>
@@ -519,6 +524,12 @@ async function sendMessage() {
     } else {
         await sendFinal(payload);
     }
+    if (receive_messages_flag == 0) {
+      console.log('receive_messages_flag='+receive_messages_flag+' -> 1');
+      receive_messages_flag = 1;
+      let timerId = setInterval(() => incMessage(), 3000);
+    }
+
 }
 
 async function sendFinal(payload) {
